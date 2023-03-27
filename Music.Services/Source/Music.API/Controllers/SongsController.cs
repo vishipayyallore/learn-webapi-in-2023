@@ -7,7 +7,7 @@ namespace Music.API.Controllers;
 [ApiController]
 public class SongsController : ControllerBase
 {
-    private List<Song> _songs = new()
+    private static readonly List<Song> _songs = new()
     {
         new Song { Id = Guid.NewGuid(), Title = "Willow", Language = "English"},
 
@@ -20,5 +20,12 @@ public class SongsController : ControllerBase
         return _songs;
     }
 
+    [HttpPost]
+    public Song AddSong(Song song)
+    {
+        _songs.Add(song);
+
+        return song;
+    }
 
 }
