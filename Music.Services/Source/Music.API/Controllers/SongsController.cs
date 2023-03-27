@@ -37,4 +37,12 @@ public class SongsController : ControllerBase
         return song;
     }
 
+    [HttpDelete("{id}")]
+    public void DeleteSong(Guid id)
+    {
+        var index = _songs.FindIndex(x => x.Id == id);
+
+        _songs.RemoveAt(index);
+    }
+
 }
