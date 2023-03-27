@@ -28,4 +28,13 @@ public class SongsController : ControllerBase
         return song;
     }
 
+    [HttpPut("{id}")]
+    public Song UpdateSong(Guid id, [FromBody] Song song)
+    {
+        var index = _songs.FindIndex(x => x.Id == id);
+        _songs[index] = song;
+
+        return song;
+    }
+
 }
