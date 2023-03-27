@@ -21,7 +21,7 @@ public class SongsController : ControllerBase
     }
 
     [HttpPost]
-    public Song AddSong(Song song)
+    public Song AddSong([FromBody] Song song)
     {
         _songs.Add(song);
 
