@@ -2,9 +2,9 @@
 
 public class Song
 {
-	public G Id { get; set; }
+	public Guid Id { get; set; }
 	
 	public string Title { get; set; }
 	
-	public string Duration { get; set; }
+	public string Language { get; set; }
 }
