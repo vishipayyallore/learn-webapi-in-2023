@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Music.API.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<MusicDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MusicDbConnectionString")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
