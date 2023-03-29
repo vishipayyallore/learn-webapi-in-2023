@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Music.API.Entities;
+using Music.API.Data.Entities;
 
 namespace Music.API.Controllers;
 
