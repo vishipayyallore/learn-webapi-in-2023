@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Music.API.Data.Entities;
+using Music.API.Persistence;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +11,18 @@ namespace Music.API.Controllers
     [ApiController]
     public class SongsController : ControllerBase
     {
+        private readonly MusicDbContext _dbContext;
+
+        public SongsController(MusicDbContext dbContext)
+        {
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
+
         // GET: api/<SongsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IReadOnlyCollection<Song>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _dbContext.Songs.ToListAsync();
         }
 
         // GET api/<SongsController>/5
