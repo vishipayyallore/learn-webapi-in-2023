@@ -1,48 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Music.API.Entities;
+using Microsoft.EntityFrameworkCore;
+using Music.API.Data.Entities;
+using Music.API.Persistence;
 
-namespace Music.API.Controllers;
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-[Route("api/[controller]")]
-[ApiController]
-public class SongsController : ControllerBase
+namespace Music.API.Controllers
 {
-    private static readonly List<Song> _songs = new()
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SongsController : ControllerBase
     {
-        new Song { Id = Guid.NewGuid(), Title = "Willow", Language = "English"},
+        private readonly MusicDbContext _dbContext;
 
-        new Song { Id = Guid.NewGuid(), Title = "After Glow", Language = "English"}
-    };
+        public SongsController(MusicDbContext dbContext)
+        {
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
 
-    [HttpGet]
-    public IReadOnlyCollection<Song> GetAllSongs()
-    {
-        return _songs;
+        // GET: api/<SongsController>
+        [HttpGet]
+        public async Task<IReadOnlyCollection<Song>> Get()
+        {
+            return await _dbContext.Songs.ToListAsync();
+        }
+
+        // GET api/<SongsController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST api/<SongsController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/<SongsController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<SongsController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
-
-    [HttpPost]
-    public Song AddSong([FromBody] Song song)
-    {
-        _songs.Add(song);
-
-        return song;
-    }
-
-    [HttpPut("{id}")]
-    public Song UpdateSong(Guid id, [FromBody] Song song)
-    {
-        var index = _songs.FindIndex(x => x.Id == id);
-        _songs[index] = song;
-
-        return song;
-    }
-
-    [HttpDelete("{id}")]
-    public void DeleteSong(Guid id)
-    {
-        var index = _songs.FindIndex(x => x.Id == id);
-
-        _songs.RemoveAt(index);
-    }
-
 }

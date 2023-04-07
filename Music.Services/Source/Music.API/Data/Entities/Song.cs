@@ -1,4 +1,4 @@
-﻿namespace Music.API.Entities;
+﻿namespace Music.API.Data.Entities;
 
 public class Song
 {
