@@ -27,15 +27,18 @@ namespace Music.API.Controllers
 
         // GET api/<SongsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return "value";
+            return await _musicDbContext.Songs.FindAsync(id) is Song song ? Ok(song) : NotFound();
         }
 
         // POST api/<SongsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Song song)
         {
+            await _musicDbContext.Songs.AddAsync(song);
+
+            return CreatedAtAction(nameof(GetById), new { id = song.Id }, song);
         }
 
         // PUT api/<SongsController>/5
