@@ -37,6 +37,7 @@ namespace Music.API.Controllers
         public async Task<IActionResult> Post([FromBody] Song song)
         {
             await _musicDbContext.Songs.AddAsync(song);
+            await _musicDbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetById), new { id = song.Id }, song);
         }
