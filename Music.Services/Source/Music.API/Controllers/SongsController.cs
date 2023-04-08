@@ -11,31 +11,35 @@ namespace Music.API.Controllers
     [ApiController]
     public class SongsController : ControllerBase
     {
-        private readonly MusicDbContext _dbContext;
+        private readonly MusicDbContext _musicDbContext;
 
         public SongsController(MusicDbContext dbContext)
         {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _musicDbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         // GET: api/<SongsController>
         [HttpGet]
         public async Task<IReadOnlyCollection<Song>> Get()
         {
-            return await _dbContext.Songs.ToListAsync();
+            return await _musicDbContext.Songs.ToListAsync();
         }
 
         // GET api/<SongsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return "value";
+            return await _musicDbContext.Songs.FindAsync(id) is Song song ? Ok(song) : NotFound();
         }
 
         // POST api/<SongsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Song song)
         {
+            await _musicDbContext.Songs.AddAsync(song);
+            await _musicDbContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetById), new { id = song.Id }, song);
         }
 
         // PUT api/<SongsController>/5

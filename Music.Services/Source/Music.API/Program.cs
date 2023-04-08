@@ -21,9 +21,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     // TODO: To be removed once we have .sqlproj
-    using var scope = app.Services.CreateScope();
+    using var scope = app.Services.CreateAsyncScope();
     using var context = scope.ServiceProvider.GetService<MusicDbContext>();
-    _ = (context?.Database.EnsureCreated());
+
+    if (!await context!.Database.CanConnectAsync())
+    {
+        _ = await context!.Database.EnsureCreatedAsync();
+    }
 }
 
 app.UseHttpsRedirection();
