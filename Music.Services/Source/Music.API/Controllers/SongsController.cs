@@ -20,9 +20,9 @@ namespace Music.API.Controllers
 
         // GET: api/<SongsController>
         [HttpGet]
-        public async Task<IReadOnlyCollection<Song>> GetSongsAsync()
+        public async Task<IActionResult> GetSongsAsync()
         {
-            return await _musicDbContext.Songs.ToListAsync();
+            return Ok(await _musicDbContext.Songs.ToListAsync());
         }
 
         // GET api/<SongsController>/5
@@ -44,8 +44,21 @@ namespace Music.API.Controllers
 
         // PUT api/<SongsController>/5
         [HttpPut("{id}")]
-        public void EditSongByIdAsync(int id, [FromBody] string value)
+        public async Task<IActionResult> EditSongByIdAsync(Guid id, [FromBody] Song updatedSong)
         {
+            var song = await _musicDbContext.Songs.FindAsync(id);
+
+            if (song is null)
+            {
+                return NotFound();
+            }
+
+            song.Title = updatedSong.Title;
+            song.Language = updatedSong.Language;
+
+            _musicDbContext.SaveChanges();
+
+            return Ok(song);
         }
 
         // DELETE api/<SongsController>/5
