@@ -7,7 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MusicDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MusicDbConnectionString")));
 
-builder.Services.AddControllers();
+_ = builder.Services.AddControllers(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -20,37 +20,37 @@ namespace Music.API.Controllers
 
         // GET: api/<SongsController>
         [HttpGet]
-        public async Task<IReadOnlyCollection<Song>> Get()
+        public async Task<IReadOnlyCollection<Song>> GetSongsAsync()
         {
             return await _musicDbContext.Songs.ToListAsync();
         }
 
         // GET api/<SongsController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetSongByIdAsync(Guid id)
         {
             return await _musicDbContext.Songs.FindAsync(id) is Song song ? Ok(song) : NotFound();
         }
 
         // POST api/<SongsController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Song song)
+        public async Task<IActionResult> AddSongAsync([FromBody] Song song)
         {
             await _musicDbContext.Songs.AddAsync(song);
             await _musicDbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = song.Id }, song);
+            return CreatedAtAction(nameof(GetSongByIdAsync), new { id = song.Id }, song);
         }
 
         // PUT api/<SongsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void EditSongByIdAsync(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<SongsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteSongByIdAsync(int id)
         {
         }
     }
