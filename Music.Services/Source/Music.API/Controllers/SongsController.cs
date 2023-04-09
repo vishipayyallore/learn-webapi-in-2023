@@ -37,6 +37,7 @@ public class SongsController : ControllerBase
     public async Task<IActionResult> AddSongAsync([FromBody] Song song)
     {
         await _musicDbContext.Songs.AddAsync(song);
+
         await _musicDbContext.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetSongByIdAsync), new { id = song.Id }, song);
@@ -56,7 +57,7 @@ public class SongsController : ControllerBase
         song.Title = updatedSong.Title;
         song.Language = updatedSong.Language;
 
-        _musicDbContext.SaveChanges();
+        await _musicDbContext.SaveChangesAsync();
 
         return Ok(song);
     }
@@ -72,7 +73,9 @@ public class SongsController : ControllerBase
             return NotFound();
         }
 
-        _musicDbContext.SaveChanges();
+        _musicDbContext.Songs.Remove(song);
+
+        await _musicDbContext.SaveChangesAsync();
 
         return NoContent();
     }
