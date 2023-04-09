@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Music.API.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
