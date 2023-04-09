@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Music.API.Data.Entities;
+namespace Music.Data.Entities;
 
 public class Song
 {

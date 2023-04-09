@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Music.API.Data.Entities;
 
 namespace Music.API.Persistence;
 
