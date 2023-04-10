@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Music.Data.Dtos;
 using Music.Data.Entities;
 using Music.Persistence;
 
@@ -37,8 +38,10 @@ public class SongsController : ControllerBase
 
     // POST api/<SongsController>
     [HttpPost]
-    public async Task<IActionResult> AddSongAsync([FromBody] Song song)
+    public async Task<IActionResult> AddSongAsync([FromBody] AddSongDto newSong)
     {
+        var song = new Song { Language = newSong.Language, Title = newSong.Title };
+
         await _musicDbContext.Songs.AddAsync(song);
 
         await _musicDbContext.SaveChangesAsync();
