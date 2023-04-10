@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Music.Data.Entities;
+namespace Music.Data.Dtos;
 
-public class Song
+public class AddSongDto
 {
-    [Key]
-    public Guid Id { get; set; }
-
     [Required]
     public string? Title { get; set; }
 

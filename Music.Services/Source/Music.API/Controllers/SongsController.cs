@@ -12,6 +12,7 @@ namespace Music.API.Controllers;
 public class SongsController : ControllerBase
 {
     private readonly MusicDbContext _musicDbContext;
+    const string notFoundMessage = "No record was found for the given id";
 
     public SongsController(MusicDbContext dbContext)
     {
@@ -29,7 +30,9 @@ public class SongsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetSongByIdAsync(Guid id)
     {
-        return await _musicDbContext.Songs.FindAsync(id) is Song song ? Ok(song) : NotFound();
+        return await _musicDbContext.Songs.FindAsync(id) is Song song ?
+            Ok(song) :
+            NotFound($"{notFoundMessage} {id}");
     }
 
     // POST api/<SongsController>
@@ -51,7 +54,7 @@ public class SongsController : ControllerBase
 
         if (song is null)
         {
-            return NotFound();
+            return NotFound($"{notFoundMessage} {id}");
         }
 
         song.Title = updatedSong.Title;
@@ -70,7 +73,7 @@ public class SongsController : ControllerBase
 
         if (song is null)
         {
-            return NotFound();
+            return NotFound($"{notFoundMessage} {id}");
         }
 
         _musicDbContext.Songs.Remove(song);
