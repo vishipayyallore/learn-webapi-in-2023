@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Music.API.Data.Entities;
+using Music.Data.Entities;
 
-namespace Music.API.Persistence;
+namespace Music.Persistence;
 
 public class MusicDbContext : DbContext
 {
