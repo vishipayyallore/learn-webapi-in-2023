@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Music.Data.Dtos;
 using Music.Data.Entities;
 using Music.Persistence;
 
@@ -12,6 +13,7 @@ namespace Music.API.Controllers;
 public class SongsController : ControllerBase
 {
     private readonly MusicDbContext _musicDbContext;
+    const string notFoundMessage = "No record was found for the given id";
 
     public SongsController(MusicDbContext dbContext)
     {
@@ -29,13 +31,17 @@ public class SongsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetSongByIdAsync(Guid id)
     {
-        return await _musicDbContext.Songs.FindAsync(id) is Song song ? Ok(song) : NotFound();
+        return await _musicDbContext.Songs.FindAsync(id) is Song song ?
+            Ok(song) :
+            NotFound($"{notFoundMessage} {id}");
     }
 
     // POST api/<SongsController>
     [HttpPost]
-    public async Task<IActionResult> AddSongAsync([FromBody] Song song)
+    public async Task<IActionResult> AddSongAsync([FromBody] AddSongDto newSong)
     {
+        var song = new Song { Language = newSong.Language, Title = newSong.Title };
+
         await _musicDbContext.Songs.AddAsync(song);
 
         await _musicDbContext.SaveChangesAsync();
@@ -51,7 +57,7 @@ public class SongsController : ControllerBase
 
         if (song is null)
         {
-            return NotFound();
+            return NotFound($"{notFoundMessage} {id}");
         }
 
         song.Title = updatedSong.Title;
@@ -70,7 +76,7 @@ public class SongsController : ControllerBase
 
         if (song is null)
         {
-            return NotFound();
+            return NotFound($"{notFoundMessage} {id}");
         }
 
         _musicDbContext.Songs.Remove(song);
