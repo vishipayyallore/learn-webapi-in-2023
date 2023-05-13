@@ -12,17 +12,19 @@ List<Game> games = new()
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+var gamesRouteGroup = app.MapGroup(GameEndpointRoutes.Prefix);
+
 app.MapGet("/", () => "Please use /Swagger to get details on GamesStores.API.");
 
-app.MapGet("/games", () => games);
+gamesRouteGroup.MapGet(GameEndpointRoutes.Root, () => games);
 
-app.MapGet("/games/{id}", Results<Ok<Game>, NotFound> (int id) =>
+gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<Game>, NotFound> (int id) =>
 {
     return games.Find(game => game.Id == id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
 })
 .WithName(GameEndpointNames.GetGameByIdName);
 
-app.MapPost("/games", (Game game) =>
+gamesRouteGroup.MapPost(GameEndpointRoutes.Root, (Game game) =>
 {
     game.Id = games.Max(game => game.Id) + 1;
 
@@ -31,7 +33,7 @@ app.MapPost("/games", (Game game) =>
     return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game);
 });
 
-app.MapPut("/games/{id}", (int id, Game updatedGame) =>
+gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, (int id, Game updatedGame) =>
 {
     var existingGame = games.Find(game => game.Id == id);
 
@@ -49,7 +51,7 @@ app.MapPut("/games/{id}", (int id, Game updatedGame) =>
     return Results.NoContent();
 });
 
-app.MapDelete("/games/{id}", (int id) =>
+gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, (int id) =>
 {
     var game = games.Find(game => game.Id == id);
 

@@ -20,6 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B0C91E92
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "PostmanCollections", "{DCDE606D-7B0E-48FF-BC10-03FB28124A86}"
+	ProjectSection(SolutionItems) = preProject
+		PostmanCollections\.NET 7 Minimal API.postman_collection.json = PostmanCollections\.NET 7 Minimal API.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
