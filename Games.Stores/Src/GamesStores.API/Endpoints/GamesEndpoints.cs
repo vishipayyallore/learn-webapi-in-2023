@@ -30,7 +30,7 @@ public static class GamesEndpoints
 
         _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, (int id, Game updatedGame) =>
         {
-            var existingGame = games.Find(game => game.Id == id);
+            var existingGame = inMemoryGamesRepository.GetGameById(id);
 
             if (existingGame is null)
             {
@@ -43,16 +43,18 @@ public static class GamesEndpoints
             existingGame.ReleaseDate = updatedGame.ReleaseDate;
             existingGame.ImageUri = updatedGame.ImageUri;
 
+            inMemoryGamesRepository.UpdateGame(existingGame);
+
             return Results.NoContent();
         });
 
         _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, (int id) =>
         {
-            var game = games.Find(game => game.Id == id);
+            var game = inMemoryGamesRepository.GetGameById(id);
 
             if (game is not null)
             {
-                games.Remove(game);
+                inMemoryGamesRepository.DeleteGame(id);
 
                 return Results.NoContent();
             }
