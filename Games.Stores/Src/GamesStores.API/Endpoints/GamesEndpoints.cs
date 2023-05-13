@@ -1,6 +1,5 @@
 ﻿using GamesStores.API.Core.Interfaces;
 using GamesStores.API.Data.Entities;
-using GamesStores.API.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,16 +20,16 @@ public static class GamesEndpoints
         })
         .WithName(GameEndpointNames.GetGameByIdName);
 
-        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, (Game game) =>
+        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, ([FromServices] IGamesRepository gamesRepository, Game game) =>
         {
-            inMemoryGamesRepository.CreateGame(game);
+            gamesRepository.CreateGame(game);
 
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game);
         });
 
-        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, (int id, Game updatedGame) =>
+        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id, Game updatedGame) =>
         {
-            var existingGame = inMemoryGamesRepository.GetGameById(id);
+            var existingGame = gamesRepository.GetGameById(id);
 
             if (existingGame is null)
             {
@@ -43,18 +42,18 @@ public static class GamesEndpoints
             existingGame.ReleaseDate = updatedGame.ReleaseDate;
             existingGame.ImageUri = updatedGame.ImageUri;
 
-            inMemoryGamesRepository.UpdateGame(existingGame);
+            gamesRepository.UpdateGame(existingGame);
 
             return Results.NoContent();
         });
 
-        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, (int id) =>
+        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
-            var game = inMemoryGamesRepository.GetGameById(id);
+            var game = gamesRepository.GetGameById(id);
 
             if (game is not null)
             {
-                inMemoryGamesRepository.DeleteGame(id);
+                gamesRepository.DeleteGame(id);
 
                 return Results.NoContent();
             }
