@@ -1,4 +1,4 @@
-﻿namespace GamesStores.API.Entities;
+﻿namespace GamesStores.API.Data.Entities;
 
 public class Game
 {
