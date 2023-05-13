@@ -1,4 +1,5 @@
 ﻿using GamesStores.API.Core.Interfaces;
+using GamesStores.API.Data.Dtos;
 using GamesStores.API.Data.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -12,19 +13,29 @@ public static class GamesEndpoints
     {
         var gamesRouteGroup = routes.MapGroup(GameEndpointRoutes.Prefix).WithParameterValidation();
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root, ([FromServices] IGamesRepository gamesRepository) => gamesRepository.GetAllGames());
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root,
+            ([FromServices] IGamesRepository gamesRepository) => gamesRepository.GetAllGames().Select(game => game.AsDto()));
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<Game>, NotFound> ([FromServices] IGamesRepository gamesRepository, int id) =>
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<GameDto>, NotFound> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
-            return gamesRepository.GetGameById(id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
+            return gamesRepository.GetGameById(id) is Game game ? TypedResults.Ok(game.AsDto()) : TypedResults.NotFound();
         })
         .WithName(GameEndpointNames.GetGameByIdName);
 
-        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, ([FromServices] IGamesRepository gamesRepository, Game game) =>
+        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, ([FromServices] IGamesRepository gamesRepository, CreateGameDto gameDto) =>
         {
+            Game game = new()
+            {
+                Name = gameDto.Name,
+                Genre = gameDto.Genre,
+                Price = gameDto.Price,
+                ReleaseDate = gameDto.ReleaseDate,
+                ImageUri = gameDto.ImageUri,
+            };
+
             gamesRepository.CreateGame(game);
 
-            return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game);
+            return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
         });
 
         _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id, Game updatedGame) =>
