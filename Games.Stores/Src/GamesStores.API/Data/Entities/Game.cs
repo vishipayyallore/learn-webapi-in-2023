@@ -14,7 +14,6 @@ public class Game
     [StringLength(20)]
     public string? Genre { get; set; }
 
-    [Required]
     [Range(1, 100)]
     public decimal? Price { get; set; }
 
