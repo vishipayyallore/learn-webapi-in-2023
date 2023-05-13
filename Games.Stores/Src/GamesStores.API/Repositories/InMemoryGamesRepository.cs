@@ -1,4 +1,5 @@
-﻿using GamesStores.API.Data.Entities;
+﻿using GamesStores.API.Core.Interfaces;
+using GamesStores.API.Data.Entities;
 
 namespace GamesStores.API.Repositories;
 
