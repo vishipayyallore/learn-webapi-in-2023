@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33603.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A945F43-01D0-412E-8CF7-65CFABAF6CEF}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{09B90CA7-E8CC-421F-BFCE-D2C3D691284E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesStores.API", "Src\GamesStores.API\GamesStores.API.csproj", "{D545EC50-9C91-450F-A832-612F0C124548}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B0C91E92-86A6-4130-87B7-472419AE928A}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\A.txt = Tests\A.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "PostmanCollections", "{DCDE606D-7B0E-48FF-BC10-03FB28124A86}"
+	ProjectSection(SolutionItems) = preProject
+		PostmanCollections\.NET 7 Minimal API.postman_collection.json = PostmanCollections\.NET 7 Minimal API.postman_collection.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D545EC50-9C91-450F-A832-612F0C124548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D545EC50-9C91-450F-A832-612F0C124548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D545EC50-9C91-450F-A832-612F0C124548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D545EC50-9C91-450F-A832-612F0C124548}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D545EC50-9C91-450F-A832-612F0C124548} = {09B90CA7-E8CC-421F-BFCE-D2C3D691284E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63BA8D35-D1B6-4AEE-8027-E53A34149AB3}
+	EndGlobalSection
+EndGlobal

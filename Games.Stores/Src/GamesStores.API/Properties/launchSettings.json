@@ -1,0 +1,37 @@
+﻿{
+  "iisSettings": {
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:43068",
+      "sslPort": 44317
+    },
+    "windowsAuthentication": false
+  },
+  "profiles": {
+    "GamesStores.API": {
+      "applicationUrl": "https://localhost:7285;http://localhost:5185",
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": true
+    },
+    "http": {
+      "applicationUrl": "http://localhost:5185",
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": true
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": true
+    }
+  }
+}
