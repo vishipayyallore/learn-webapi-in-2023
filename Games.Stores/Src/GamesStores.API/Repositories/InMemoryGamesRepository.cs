@@ -2,7 +2,7 @@
 
 namespace GamesStores.API.Repositories;
 
-public class InMemoryGamesRepository
+public class InMemoryGamesRepository : IGamesRepository
 {
     private readonly List<Game> games = GetDummyGames();
 
