@@ -1,64 +1,70 @@
-﻿using GamesStores.API.Data.Entities;
+﻿using GamesStores.API.Core.Interfaces;
+using GamesStores.API.Data.Dtos;
+using GamesStores.API.Data.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GamesStores.API.Endpoints;
 
 public static class GamesEndpoints
 {
 
-    static readonly List<Game> games = new()
-    {
-        new Game { Id = 1, Name = "Street Fight II", Genre ="Fighting", Price = 18.00M, ReleaseDate = DateTime.Now, ImageUri = "https://placehold.co/100" },
-        new Game { Id = 2, Name = "Final Fantasy XIV", Genre ="Roleplaying", Price = 19.00M, ReleaseDate = DateTime.Now, ImageUri = "https://placehold.co/100" },
-        new Game { Id = 3, Name = "FIFA 2023", Genre ="Sports", Price = 20.00M, ReleaseDate = DateTime.Now, ImageUri = "https://placehold.co/100" }
-    };
-
     public static RouteGroupBuilder MapGamesEndpoints(this IEndpointRouteBuilder routes)
     {
         var gamesRouteGroup = routes.MapGroup(GameEndpointRoutes.Prefix).WithParameterValidation();
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root, () => games);
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root,
+            ([FromServices] IGamesRepository gamesRepository) => gamesRepository.GetAllGames().Select(game => game.AsDto()));
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<Game>, NotFound> (int id) =>
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<GameDto>, NotFound> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
-            return games.Find(game => game.Id == id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
+            return gamesRepository.GetGameById(id) is Game game ? TypedResults.Ok(game.AsDto()) : TypedResults.NotFound();
         })
         .WithName(GameEndpointNames.GetGameByIdName);
 
-        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, (Game game) =>
+        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, ([FromServices] IGamesRepository gamesRepository, CreateGameDto gameDto) =>
         {
-            game.Id = games.Max(game => game.Id) + 1;
+            Game game = new()
+            {
+                Name = gameDto.Name,
+                Genre = gameDto.Genre,
+                Price = gameDto.Price,
+                ReleaseDate = gameDto.ReleaseDate,
+                ImageUri = gameDto.ImageUri,
+            };
 
-            games.Add(game);
+            gamesRepository.CreateGame(game);
 
-            return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game);
+            return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
         });
 
-        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, (int id, Game updatedGame) =>
+        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
-            var existingGame = games.Find(game => game.Id == id);
+            var existingGame = gamesRepository.GetGameById(id);
 
             if (existingGame is null)
             {
                 return Results.NotFound();
             }
 
-            existingGame.Name = updatedGame.Name;
-            existingGame.Genre = updatedGame.Genre;
-            existingGame.Price = updatedGame.Price;
-            existingGame.ReleaseDate = updatedGame.ReleaseDate;
-            existingGame.ImageUri = updatedGame.ImageUri;
+            existingGame.Name = updatedGameDto.Name;
+            existingGame.Genre = updatedGameDto.Genre;
+            existingGame.Price = updatedGameDto.Price;
+            existingGame.ReleaseDate = updatedGameDto.ReleaseDate;
+            existingGame.ImageUri = updatedGameDto.ImageUri;
+
+            gamesRepository.UpdateGame(existingGame);
 
             return Results.NoContent();
         });
 
-        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, (int id) =>
+        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
-            var game = games.Find(game => game.Id == id);
+            var game = gamesRepository.GetGameById(id);
 
             if (game is not null)
             {
-                games.Remove(game);
+                gamesRepository.DeleteGame(id);
 
                 return Results.NoContent();
             }
