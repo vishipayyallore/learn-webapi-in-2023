@@ -1,4 +1,4 @@
-using GamesStores.API.Entities;
+using GamesStores.API.Data.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using static GamesStores.API.Core.Common.Constants;
 
@@ -12,7 +12,8 @@ List<Game> games = new()
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-var gamesRouteGroup = app.MapGroup(GameEndpointRoutes.Prefix);
+var gamesRouteGroup = app.MapGroup(GameEndpointRoutes.Prefix)
+                         .WithParameterValidation();
 
 app.MapGet("/", () => "Please use /Swagger to get details on GamesStores.API.");
 
