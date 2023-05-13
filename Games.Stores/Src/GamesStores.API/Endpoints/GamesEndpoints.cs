@@ -1,6 +1,8 @@
-﻿using GamesStores.API.Data.Entities;
+﻿using GamesStores.API.Core.Interfaces;
+using GamesStores.API.Data.Entities;
 using GamesStores.API.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GamesStores.API.Endpoints;
 
@@ -9,15 +11,13 @@ public static class GamesEndpoints
 
     public static RouteGroupBuilder MapGamesEndpoints(this IEndpointRouteBuilder routes)
     {
-        InMemoryGamesRepository inMemoryGamesRepository = new();
-
         var gamesRouteGroup = routes.MapGroup(GameEndpointRoutes.Prefix).WithParameterValidation();
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root, () => inMemoryGamesRepository.GetAllGames());
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root, ([FromServices] IGamesRepository gamesRepository) => gamesRepository.GetAllGames());
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<Game>, NotFound> (int id) =>
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<Game>, NotFound> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
-            return inMemoryGamesRepository.GetGameById(id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
+            return gamesRepository.GetGameById(id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
         })
         .WithName(GameEndpointNames.GetGameByIdName);
 
