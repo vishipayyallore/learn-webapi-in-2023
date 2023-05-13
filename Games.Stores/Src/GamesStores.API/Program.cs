@@ -1,5 +1,6 @@
 
 using GamesStores.API.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 List<Game> games = new()
 {
@@ -14,5 +15,10 @@ var app = builder.Build();
 app.MapGet("/", () => "Please use /Swagger to get details on GamesStores.API.");
 
 app.MapGet("/games", () => games);
+
+app.MapGet("/games/{id}", Results<Ok<Game>, NotFound> (int id) =>
+{
+    return games.Find(game => game.Id == id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
+});
 
 app.Run();
