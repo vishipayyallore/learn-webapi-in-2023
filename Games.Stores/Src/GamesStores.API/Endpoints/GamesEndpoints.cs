@@ -1,4 +1,5 @@
 ﻿using GamesStores.API.Data.Entities;
+using GamesStores.API.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace GamesStores.API.Endpoints;
@@ -6,17 +7,17 @@ namespace GamesStores.API.Endpoints;
 public static class GamesEndpoints
 {
 
-
-
     public static RouteGroupBuilder MapGamesEndpoints(this IEndpointRouteBuilder routes)
     {
+        InMemoryGamesRepository inMemoryGamesRepository = new();
+
         var gamesRouteGroup = routes.MapGroup(GameEndpointRoutes.Prefix).WithParameterValidation();
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root, () => games);
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root, () => inMemoryGamesRepository.GetAllGames());
 
         _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<Game>, NotFound> (int id) =>
         {
-            return games.Find(game => game.Id == id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
+            return inMemoryGamesRepository.GetGameById(id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
         })
         .WithName(GameEndpointNames.GetGameByIdName);
 
