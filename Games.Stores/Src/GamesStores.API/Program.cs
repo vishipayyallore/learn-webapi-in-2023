@@ -1,6 +1,5 @@
 using GamesStores.API.Data.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
-using static GamesStores.API.Core.Common.Constants;
 
 List<Game> games = new()
 {
