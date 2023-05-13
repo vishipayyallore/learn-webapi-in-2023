@@ -38,7 +38,7 @@ public static class GamesEndpoints
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
         });
 
-        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id, Game updatedGame) =>
+        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
             var existingGame = gamesRepository.GetGameById(id);
 
@@ -47,11 +47,11 @@ public static class GamesEndpoints
                 return Results.NotFound();
             }
 
-            existingGame.Name = updatedGame.Name;
-            existingGame.Genre = updatedGame.Genre;
-            existingGame.Price = updatedGame.Price;
-            existingGame.ReleaseDate = updatedGame.ReleaseDate;
-            existingGame.ImageUri = updatedGame.ImageUri;
+            existingGame.Name = updatedGameDto.Name;
+            existingGame.Genre = updatedGameDto.Genre;
+            existingGame.Price = updatedGameDto.Price;
+            existingGame.ReleaseDate = updatedGameDto.ReleaseDate;
+            existingGame.ImageUri = updatedGameDto.ImageUri;
 
             gamesRepository.UpdateGame(existingGame);
 
