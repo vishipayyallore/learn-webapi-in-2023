@@ -23,9 +23,7 @@ public static class GamesEndpoints
 
         _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, (Game game) =>
         {
-            game.Id = games.Max(game => game.Id) + 1;
-
-            games.Add(game);
+            inMemoryGamesRepository.CreateGame(game);
 
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game);
         });
