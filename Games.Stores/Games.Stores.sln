@@ -15,6 +15,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesStores.API", "Src\GamesStores.API\GamesStores.API.csproj", "{D545EC50-9C91-450F-A832-612F0C124548}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B0C91E92-86A6-4130-87B7-472419AE928A}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\A.txt = Tests\A.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "PostmanCollections", "{DCDE606D-7B0E-48FF-BC10-03FB28124A86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
