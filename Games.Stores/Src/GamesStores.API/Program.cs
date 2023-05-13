@@ -1,6 +1,6 @@
-
 using GamesStores.API.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
+using static GamesStores.API.Core.Common.Constants;
 
 List<Game> games = new()
 {
@@ -19,6 +19,16 @@ app.MapGet("/games", () => games);
 app.MapGet("/games/{id}", Results<Ok<Game>, NotFound> (int id) =>
 {
     return games.Find(game => game.Id == id) is Game game ? TypedResults.Ok(game) : TypedResults.NotFound();
+})
+.WithName(GameEndpointNames.GetGameByIdName);
+
+app.MapPost("/games", (Game game) =>
+{
+    game.Id = games.Max(game => game.Id) + 1;
+
+    games.Add(game);
+
+    return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game);
 });
 
 app.Run();
