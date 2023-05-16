@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IGamesRepository, InMemoryGamesRepository>();
 
+var connectionString = builder.Configuration.GetConnectionString("GamesStoreConnectionString");
+
 var app = builder.Build();
 
 app.MapGet("/", () => "Please use /Swagger to get details on GamesStores.API.");
