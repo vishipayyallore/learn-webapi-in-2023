@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IGamesRepository, InMemoryGamesRepository>();
 
-var connectionString = builder.Configuration.GetConnectionString("GamesStoreConnectionString");
+var connectionString = builder.Configuration.GetConnectionString(ConfigurationConnectionStrings.GamesStoreConnectionString);
 
 var app = builder.Build();
 
