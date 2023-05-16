@@ -1,6 +1,6 @@
-# learn-webapi-in-2023
+# Games Store Minimal API using .NET 7
 
-I am learning Minimal API from different Video Courses, Websites, and books
+To be done.
 
 ## SQL Server Docker Container
 
