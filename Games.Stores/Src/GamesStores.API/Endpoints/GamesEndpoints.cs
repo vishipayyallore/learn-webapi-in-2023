@@ -1,7 +1,4 @@
-﻿using GamesStores.API.Core.Interfaces;
-using GamesStores.API.Data.Dtos;
-using GamesStores.API.Data.Entities;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GamesStores.API.Endpoints;

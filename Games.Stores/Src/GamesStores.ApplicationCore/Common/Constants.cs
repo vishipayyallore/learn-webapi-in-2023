@@ -1,4 +1,4 @@
-﻿namespace GamesStores.API.Core.Common;
+﻿namespace GamesStores.ApplicationCore.Common;
 
 public static class Constants
 {

@@ -1,4 +1,3 @@
-using GamesStores.API.Core.Interfaces;
 using GamesStores.API.Endpoints;
 using GamesStores.API.Repositories;
 
