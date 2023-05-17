@@ -1,4 +1,7 @@
-﻿namespace GamesStores.API.Repositories;
+﻿using GamesStores.ApplicationCore.Interfaces;
+using GamesStores.Data.Entities;
+
+namespace GamesStores.Repositories;
 
 public class InMemoryGamesRepository : IGamesRepository
 {
