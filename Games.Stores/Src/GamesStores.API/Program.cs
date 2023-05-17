@@ -1,5 +1,7 @@
 using GamesStores.API.Endpoints;
-using GamesStores.API.Repositories;
+using GamesStores.ApplicationCore.Interfaces;
+using GamesStores.Repositories;
+using static GamesStores.ApplicationCore.Common.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 

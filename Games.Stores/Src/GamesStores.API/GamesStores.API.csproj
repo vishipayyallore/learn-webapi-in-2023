@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GamesStores.ApplicationCore\GamesStores.ApplicationCore.csproj" />
+    <ProjectReference Include="..\GamesStores.Repositories\GamesStores.Repositories.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="GamesStores.API.Core.Common.Constants" Static="true" />
   </ItemGroup>
 
