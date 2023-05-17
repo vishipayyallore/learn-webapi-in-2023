@@ -3,7 +3,6 @@ using GamesStores.Data.Dtos;
 using GamesStores.Data.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using static GamesStores.ApplicationCore.Common.Constants;
 
 namespace GamesStores.API.Endpoints;
 
