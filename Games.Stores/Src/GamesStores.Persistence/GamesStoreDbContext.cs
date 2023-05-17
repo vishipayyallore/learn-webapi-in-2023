@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GamesStores.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamesStores.Persistence
 {
@@ -11,7 +12,7 @@ namespace GamesStores.Persistence
         }
 
 
-        // public DbSet<Game> MyProperty { get; set; }
+        public DbSet<Game> Game => Set<Game>();
     }
 
 }
