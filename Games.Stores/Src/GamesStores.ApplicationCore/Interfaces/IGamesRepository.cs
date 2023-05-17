@@ -1,4 +1,6 @@
-﻿namespace GamesStores.ApplicationCore.Interfaces;
+﻿using GamesStores.Data.Entities;
+
+namespace GamesStores.ApplicationCore.Interfaces;
 
 public interface IGamesRepository
 {
