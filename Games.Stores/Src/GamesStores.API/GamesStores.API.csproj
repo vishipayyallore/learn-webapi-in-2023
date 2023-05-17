@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GamesStores.ApplicationCore\GamesStores.ApplicationCore.csproj" />
+    <ProjectReference Include="..\GamesStores.Persistence\GamesStores.Persistence.csproj" />
     <ProjectReference Include="..\GamesStores.Repositories\GamesStores.Repositories.csproj" />
   </ItemGroup>
 
