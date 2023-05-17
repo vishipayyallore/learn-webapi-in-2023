@@ -15,4 +15,8 @@
     <Using Include="GamesStores.API.Core.Common.Constants" Static="true" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
