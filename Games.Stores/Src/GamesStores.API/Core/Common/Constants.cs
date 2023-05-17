@@ -16,4 +16,10 @@ public static class Constants
 
         public static string ActionById => "/{id}";
     }
+
+    public static class ConfigurationConnectionStrings
+    {
+        public static string GamesStoreConnectionString => "GamesStoreConnectionString";
+    }
+
 }
