@@ -1,4 +1,4 @@
-﻿using GamesStores.API.Data.Dtos;
+﻿using GamesStores.Data.Dtos;
 
 namespace GamesStores.Data.Entities;
 
