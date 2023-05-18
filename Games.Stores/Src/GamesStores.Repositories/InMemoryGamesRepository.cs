@@ -7,35 +7,41 @@ public class InMemoryGamesRepository : IGamesRepository
 {
     private readonly List<Game> games = GetDummyGames();
 
-    public IReadOnlyCollection<Game> GetAllGamesAsync()
+    public async Task<IReadOnlyCollection<Game>> GetAllGamesAsync()
     {
-        return games;
+        return await Task.FromResult(games);
     }
 
-    public Game? GetGameByIdAsync(int id)
+    public async Task<Game?> GetGameByIdAsync(int id)
     {
-        return games.Find(game => game.Id == id);
+        return await Task.FromResult(games.Find(game => game.Id == id));
     }
 
-    public void CreateGameAsync(Game game)
+    public async Task CreateGameAsync(Game game)
     {
         game.Id = games.Max(game => game.Id) + 1;
 
         games.Add(game);
+
+        await Task.CompletedTask;
     }
 
-    public void UpdateGameAsync(Game updatedGame)
+    public async Task UpdateGameAsync(Game updatedGame)
     {
         var index = games.FindIndex(game => game.Id == updatedGame.Id);
 
         games[index] = updatedGame;
+
+        await Task.CompletedTask;
     }
 
-    public void DeleteGameAsync(int id)
+    public async Task DeleteGameAsync(int id)
     {
         var index = games.FindIndex(game => game.Id == id);
 
         games.RemoveAt(index);
+
+        await Task.CompletedTask;
     }
 
     private static List<Game> GetDummyGames()
