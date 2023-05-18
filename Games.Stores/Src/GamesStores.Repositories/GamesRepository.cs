@@ -14,35 +14,35 @@ public class GamesRepository : IGamesRepository
         _gamesStoreDbContext = gamesStoreDbContext ?? throw new ArgumentNullException(nameof(gamesStoreDbContext));
     }
 
-    public IReadOnlyCollection<Game> GetAllGamesAsync()
+    public async Task<IReadOnlyCollection<Game>> GetAllGamesAsync()
     {
-        return _gamesStoreDbContext.Games.AsNoTracking().ToList();
+        return await _gamesStoreDbContext.Games.AsNoTracking().ToListAsync();
     }
 
-    public Game? GetGameByIdAsync(int id)
+    public async Task<Game?> GetGameByIdAsync(int id)
     {
-        return _gamesStoreDbContext.Games.Find(id);
+        return await _gamesStoreDbContext.Games.FindAsync(id);
     }
 
-    public void CreateGameAsync(Game game)
+    public async Task CreateGameAsync(Game game)
     {
         _gamesStoreDbContext.Games.Add(game);
 
-        _gamesStoreDbContext.SaveChanges();
+        await _gamesStoreDbContext.SaveChangesAsync();
     }
 
-    public void UpdateGameAsync(Game updatedGame)
+    public async Task UpdateGameAsync(Game updatedGame)
     {
         _gamesStoreDbContext.Update(updatedGame);
 
-        _gamesStoreDbContext.SaveChanges();
+        await _gamesStoreDbContext.SaveChangesAsync();
     }
 
-    public void DeleteGameAsync(int id)
+    public async Task DeleteGameAsync(int id)
     {
-        _gamesStoreDbContext.Games
-            .Where(game => game.Id == id)
-            .ExecuteDelete();
+        await _gamesStoreDbContext.Games
+                .Where(game => game.Id == id)
+                .ExecuteDeleteAsync();
     }
 
 }
