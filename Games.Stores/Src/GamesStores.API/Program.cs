@@ -1,6 +1,7 @@
 using GamesStores.API.Endpoints;
 using GamesStores.ApplicationCore.Interfaces;
 using GamesStores.Persistence;
+using GamesStores.Persistence.Extensions;
 using GamesStores.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<GamesStoreDbContext>(options =>
 var app = builder.Build();
 
 app.MapGet("/", () => "Please use /Swagger to get details on GamesStores.API.");
+
+app.Services.InitializeGamesStoreDatabaseAsync();
 
 app.MapGamesEndpoints();
 
