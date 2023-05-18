@@ -40,7 +40,7 @@ public static class GamesEndpoints
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
         });
 
-        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, async IResult ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
+        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
             var existingGame = await gamesRepository.GetGameByIdAsync(id);
 
@@ -60,7 +60,7 @@ public static class GamesEndpoints
             return Results.NoContent();
         });
 
-        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, async IResult ([FromServices] IGamesRepository gamesRepository, int id) =>
+        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
             var game = await gamesRepository.GetGameByIdAsync(id);
 
