@@ -1,6 +1,6 @@
-﻿using GamesStores.API.Core.Interfaces;
-using GamesStores.API.Data.Dtos;
-using GamesStores.API.Data.Entities;
+﻿using GamesStores.ApplicationCore.Interfaces;
+using GamesStores.Data.Dtos;
+using GamesStores.Data.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 

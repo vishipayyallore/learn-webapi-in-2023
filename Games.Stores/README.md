@@ -12,3 +12,9 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=$saPassword" -p 1433:1433 -v
 ## Path to Docker Volumes
 
 [\\wsl$\docker-desktop-data\data\docker\volumes](\\wsl$\docker-desktop-data\data\docker\volumes)
+
+## EF Core Tool
+
+```powershell
+dotnet tool install --global dotnet-ef
+```

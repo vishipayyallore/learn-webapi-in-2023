@@ -1,6 +1,6 @@
-﻿using GamesStores.API.Data.Dtos;
+﻿using GamesStores.Data.Dtos;
 
-namespace GamesStores.API.Data.Entities;
+namespace GamesStores.Data.Entities;
 
 public static class EntityExtensions
 {
