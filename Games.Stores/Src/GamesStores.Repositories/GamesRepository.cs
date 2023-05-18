@@ -34,6 +34,8 @@ public class GamesRepository : IGamesRepository
     public void UpdateGame(Game updatedGame)
     {
         _gamesStoreDbContext.Update(updatedGame);
+
+        _gamesStoreDbContext.SaveChanges();
     }
 
     public void DeleteGame(int id)
