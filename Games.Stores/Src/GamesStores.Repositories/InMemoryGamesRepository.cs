@@ -7,31 +7,31 @@ public class InMemoryGamesRepository : IGamesRepository
 {
     private readonly List<Game> games = GetDummyGames();
 
-    public IReadOnlyCollection<Game> GetAllGames()
+    public IReadOnlyCollection<Game> GetAllGamesAsync()
     {
         return games;
     }
 
-    public Game? GetGameById(int id)
+    public Game? GetGameByIdAsync(int id)
     {
         return games.Find(game => game.Id == id);
     }
 
-    public void CreateGame(Game game)
+    public void CreateGameAsync(Game game)
     {
         game.Id = games.Max(game => game.Id) + 1;
 
         games.Add(game);
     }
 
-    public void UpdateGame(Game updatedGame)
+    public void UpdateGameAsync(Game updatedGame)
     {
         var index = games.FindIndex(game => game.Id == updatedGame.Id);
 
         games[index] = updatedGame;
     }
 
-    public void DeleteGame(int id)
+    public void DeleteGameAsync(int id)
     {
         var index = games.FindIndex(game => game.Id == id);
 

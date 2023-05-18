@@ -14,31 +14,31 @@ public class GamesRepository : IGamesRepository
         _gamesStoreDbContext = gamesStoreDbContext ?? throw new ArgumentNullException(nameof(gamesStoreDbContext));
     }
 
-    public IReadOnlyCollection<Game> GetAllGames()
+    public IReadOnlyCollection<Game> GetAllGamesAsync()
     {
         return _gamesStoreDbContext.Games.AsNoTracking().ToList();
     }
 
-    public Game? GetGameById(int id)
+    public Game? GetGameByIdAsync(int id)
     {
         return _gamesStoreDbContext.Games.Find(id);
     }
 
-    public void CreateGame(Game game)
+    public void CreateGameAsync(Game game)
     {
         _gamesStoreDbContext.Games.Add(game);
 
         _gamesStoreDbContext.SaveChanges();
     }
 
-    public void UpdateGame(Game updatedGame)
+    public void UpdateGameAsync(Game updatedGame)
     {
         _gamesStoreDbContext.Update(updatedGame);
 
         _gamesStoreDbContext.SaveChanges();
     }
 
-    public void DeleteGame(int id)
+    public void DeleteGameAsync(int id)
     {
         _gamesStoreDbContext.Games
             .Where(game => game.Id == id)

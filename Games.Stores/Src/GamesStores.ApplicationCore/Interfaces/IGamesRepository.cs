@@ -4,13 +4,13 @@ namespace GamesStores.ApplicationCore.Interfaces;
 
 public interface IGamesRepository
 {
-    void CreateGame(Game game);
+    Task<IReadOnlyCollection<Game>> GetAllGamesAsync();
 
-    void DeleteGame(int id);
+    Task<Game?> GetGameByIdAsync(int id);
 
-    IReadOnlyCollection<Game> GetAllGames();
+    Task CreateGameAsync(Game game);
 
-    Game? GetGameById(int id);
+    Task UpdateGameAsync(Game updatedGame);
 
-    void UpdateGame(Game updatedGame);
+    Task DeleteGameAsync(int id);
 }
