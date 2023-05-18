@@ -1,6 +1,7 @@
 ﻿using GamesStores.ApplicationCore.Interfaces;
 using GamesStores.Data.Dtos;
 using GamesStores.Data.Entities;
+using GamesStores.Persistence;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ public static class GamesEndpoints
         var gamesRouteGroup = routes.MapGroup(GameEndpointRoutes.Prefix).WithParameterValidation();
 
         _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root,
-            ([FromServices] IGamesRepository gamesRepository) => gamesRepository.GetAllGames().Select(game => game.AsDto()));
+            ([FromServices] IGamesRepository gamesRepository, [FromServices] GamesStoreDbContext gamesStoreDbContext) => gamesRepository.GetAllGames().Select(game => game.AsDto()));
 
         _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<GameDto>, NotFound> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
