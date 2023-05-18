@@ -17,6 +17,8 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=$saPassword" -p 1433:1433 -v
 
 ```powershell
 dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialCreate
 
 Microsoft.EntityFrameworkCore.Tools
+Add-Migration InitialCreate
 ```
