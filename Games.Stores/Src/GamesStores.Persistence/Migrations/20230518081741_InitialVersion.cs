@@ -18,7 +18,7 @@ namespace GamesStores.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Genre = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,5)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(5,2)", precision: 5, scale: 2, nullable: true),
                     ReleaseDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     ImageUri = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true)
                 },

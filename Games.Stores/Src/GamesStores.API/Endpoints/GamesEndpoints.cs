@@ -15,15 +15,16 @@ public static class GamesEndpoints
         var gamesRouteGroup = routes.MapGroup(GameEndpointRoutes.Prefix).WithParameterValidation();
 
         _ = gamesRouteGroup.MapGet(GameEndpointRoutes.Root,
-            ([FromServices] IGamesRepository gamesRepository, [FromServices] GamesStoreDbContext gamesStoreDbContext) => gamesRepository.GetAllGames().Select(game => game.AsDto()));
+            async Task<IEnumerable<GameDto>> ([FromServices] IGamesRepository gamesRepository, [FromServices] GamesStoreDbContext gamesStoreDbContext) =>
+                (await gamesRepository.GetAllGamesAsync()).Select(game => game.AsDto()));
 
-        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, Results<Ok<GameDto>, NotFound> ([FromServices] IGamesRepository gamesRepository, int id) =>
+        _ = gamesRouteGroup.MapGet(GameEndpointRoutes.ActionById, async Task<Results<Ok<GameDto>, NotFound>> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
-            return gamesRepository.GetGameById(id) is Game game ? TypedResults.Ok(game.AsDto()) : TypedResults.NotFound();
+            return await gamesRepository.GetGameByIdAsync(id) is Game game ? TypedResults.Ok(game.AsDto()) : TypedResults.NotFound();
         })
         .WithName(GameEndpointNames.GetGameByIdName);
 
-        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, ([FromServices] IGamesRepository gamesRepository, CreateGameDto gameDto) =>
+        _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, CreateGameDto gameDto) =>
         {
             Game game = new()
             {
@@ -34,14 +35,14 @@ public static class GamesEndpoints
                 ImageUri = gameDto.ImageUri,
             };
 
-            gamesRepository.CreateGame(game);
+            await gamesRepository.CreateGameAsync(game);
 
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
         });
 
-        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
+        _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
-            var existingGame = gamesRepository.GetGameById(id);
+            var existingGame = await gamesRepository.GetGameByIdAsync(id);
 
             if (existingGame is null)
             {
@@ -54,18 +55,18 @@ public static class GamesEndpoints
             existingGame.ReleaseDate = updatedGameDto.ReleaseDate;
             existingGame.ImageUri = updatedGameDto.ImageUri;
 
-            gamesRepository.UpdateGame(existingGame);
+            await gamesRepository.UpdateGameAsync(existingGame);
 
             return Results.NoContent();
         });
 
-        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, ([FromServices] IGamesRepository gamesRepository, int id) =>
+        _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
-            var game = gamesRepository.GetGameById(id);
+            var game = await gamesRepository.GetGameByIdAsync(id);
 
             if (game is not null)
             {
-                gamesRepository.DeleteGame(id);
+                await gamesRepository.DeleteGameAsync(id);
 
                 return Results.NoContent();
             }

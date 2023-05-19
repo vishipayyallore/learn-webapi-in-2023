@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesStores.Persistence.Migrations
 {
     [DbContext(typeof(GamesStoreDbContext))]
-    [Migration("20230518032238_InitialVersion")]
+    [Migration("20230518081741_InitialVersion")]
     partial class InitialVersion
     {
         /// <inheritdoc />
@@ -48,6 +48,7 @@ namespace GamesStores.Persistence.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal?>("Price")
+                        .HasPrecision(5, 2)
                         .HasColumnType("decimal(18,5)");
 
                     b.Property<DateTimeOffset?>("ReleaseDate")

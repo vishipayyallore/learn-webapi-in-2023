@@ -45,6 +45,7 @@ namespace GamesStores.Persistence.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal?>("Price")
+                        .HasPrecision(5, 2)
                         .HasColumnType("decimal(18,5)");
 
                     b.Property<DateTimeOffset?>("ReleaseDate")
