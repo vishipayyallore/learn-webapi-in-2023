@@ -14,6 +14,10 @@ public static class DependedServicesExtensions
 
         _ = services.AddScoped<IGamesRepository, GamesRepository>();
 
+        _ = services.AddAuthentication().AddJwtBearer();
+
+        _ = services.AddAuthorization();
+
         return services;
     }
 

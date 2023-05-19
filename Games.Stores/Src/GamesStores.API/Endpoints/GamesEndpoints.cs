@@ -22,7 +22,8 @@ public static class GamesEndpoints
         {
             return await gamesRepository.GetGameByIdAsync(id) is Game game ? TypedResults.Ok(game.AsDto()) : TypedResults.NotFound();
         })
-        .WithName(GameEndpointNames.GetGameByIdName);
+        .WithName(GameEndpointNames.GetGameByIdName)
+        .RequireAuthorization();
 
         _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, CreateGameDto gameDto) =>
         {
@@ -38,7 +39,8 @@ public static class GamesEndpoints
             await gamesRepository.CreateGameAsync(game);
 
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
-        });
+        })
+         .RequireAuthorization();
 
         _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
@@ -58,7 +60,8 @@ public static class GamesEndpoints
             await gamesRepository.UpdateGameAsync(existingGame);
 
             return Results.NoContent();
-        });
+        })
+        .RequireAuthorization();
 
         _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
@@ -72,7 +75,8 @@ public static class GamesEndpoints
             }
 
             return Results.NotFound();
-        });
+        })
+        .RequireAuthorization();
 
         return gamesRouteGroup;
     }
