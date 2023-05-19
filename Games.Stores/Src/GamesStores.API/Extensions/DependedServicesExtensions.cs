@@ -24,7 +24,9 @@ public static class DependedServicesExtensions
 
         _ = services.AddAuthorization(options =>
         {
-            options.AddPolicy(Policies.WriteAccess, builder => builder.RequireClaim("scope", "games:write"));
+            options.AddPolicy(Policies.WriteAccess, builder =>
+                                builder.RequireClaim("scope", "games:write")
+                                        .RequireRole("Admin"));
         });
 
         return services;
