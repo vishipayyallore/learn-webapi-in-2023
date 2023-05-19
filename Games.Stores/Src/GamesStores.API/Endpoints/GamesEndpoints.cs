@@ -41,10 +41,12 @@ public static class GamesEndpoints
 
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
         })
-         .RequireAuthorization(policy =>
-         {
-             _ = policy.RequireRole("Admin");
-         });
+         .RequireAuthorization(Policies.WriteAccess);
+        // Role Based
+        //.RequireAuthorization(policy =>
+        //{
+        //    _ = policy.RequireRole("Admin");
+        //});
 
         _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
@@ -65,7 +67,7 @@ public static class GamesEndpoints
 
             return Results.NoContent();
         })
-        .RequireAuthorization();
+        .RequireAuthorization(Policies.WriteAccess);
 
         _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
@@ -80,7 +82,7 @@ public static class GamesEndpoints
 
             return Results.NotFound();
         })
-        .RequireAuthorization();
+        .RequireAuthorization(Policies.WriteAccess);
 
         return gamesRouteGroup;
     }
