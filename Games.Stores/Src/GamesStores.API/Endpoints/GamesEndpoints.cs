@@ -40,7 +40,10 @@ public static class GamesEndpoints
 
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
         })
-         .RequireAuthorization();
+         .RequireAuthorization(policy =>
+         {
+             _ = policy.RequireRole("Admin");
+         });
 
         _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
