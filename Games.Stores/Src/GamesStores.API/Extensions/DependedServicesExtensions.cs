@@ -1,4 +1,5 @@
-﻿using GamesStores.ApplicationCore.Interfaces;
+﻿using GamesStores.API.Authorization;
+using GamesStores.ApplicationCore.Interfaces;
 using GamesStores.Persistence;
 using GamesStores.Repositories;
 
@@ -16,7 +17,15 @@ public static class DependedServicesExtensions
 
         _ = services.AddAuthentication().AddJwtBearer();
 
-        _ = services.AddAuthorization();
+        _ = services.AddAuthorization(options =>
+        {
+            options.AddPolicy(Policies.ReadAccess, builder => builder.RequireClaim("scope", "games:read"));
+        });
+
+        _ = services.AddAuthorization(options =>
+        {
+            options.AddPolicy(Policies.WriteAccess, builder => builder.RequireClaim("scope", "games:write"));
+        });
 
         return services;
     }

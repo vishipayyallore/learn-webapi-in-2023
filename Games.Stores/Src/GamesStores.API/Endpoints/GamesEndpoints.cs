@@ -1,4 +1,5 @@
-﻿using GamesStores.ApplicationCore.Interfaces;
+﻿using GamesStores.API.Authorization;
+using GamesStores.ApplicationCore.Interfaces;
 using GamesStores.Data.Dtos;
 using GamesStores.Data.Entities;
 using GamesStores.Persistence;
@@ -23,7 +24,7 @@ public static class GamesEndpoints
             return await gamesRepository.GetGameByIdAsync(id) is Game game ? TypedResults.Ok(game.AsDto()) : TypedResults.NotFound();
         })
         .WithName(GameEndpointNames.GetGameByIdName)
-        .RequireAuthorization();
+        .RequireAuthorization(Policies.ReadAccess);
 
         _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, CreateGameDto gameDto) =>
         {
