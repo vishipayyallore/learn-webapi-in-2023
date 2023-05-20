@@ -1,4 +1,5 @@
-﻿using GamesStores.ApplicationCore.Interfaces;
+﻿using GamesStores.API.Authorization;
+using GamesStores.ApplicationCore.Interfaces;
 using GamesStores.Data.Dtos;
 using GamesStores.Data.Entities;
 using GamesStores.Persistence;
@@ -22,7 +23,8 @@ public static class GamesEndpoints
         {
             return await gamesRepository.GetGameByIdAsync(id) is Game game ? TypedResults.Ok(game.AsDto()) : TypedResults.NotFound();
         })
-        .WithName(GameEndpointNames.GetGameByIdName);
+        .WithName(GameEndpointNames.GetGameByIdName)
+        .RequireAuthorization(Policies.ReadAccess);
 
         _ = gamesRouteGroup.MapPost(GameEndpointRoutes.Root, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, CreateGameDto gameDto) =>
         {
@@ -38,7 +40,13 @@ public static class GamesEndpoints
             await gamesRepository.CreateGameAsync(game);
 
             return Results.CreatedAtRoute(GameEndpointNames.GetGameByIdName, new { id = game.Id }, game.AsDto());
-        });
+        })
+         .RequireAuthorization(Policies.WriteAccess);
+        // Role Based
+        //.RequireAuthorization(policy =>
+        //{
+        //    _ = policy.RequireRole("Admin");
+        //});
 
         _ = gamesRouteGroup.MapPut(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id, UpdateGameDto updatedGameDto) =>
         {
@@ -58,7 +66,8 @@ public static class GamesEndpoints
             await gamesRepository.UpdateGameAsync(existingGame);
 
             return Results.NoContent();
-        });
+        })
+        .RequireAuthorization(Policies.WriteAccess);
 
         _ = gamesRouteGroup.MapDelete(GameEndpointRoutes.ActionById, async Task<IResult> ([FromServices] IGamesRepository gamesRepository, int id) =>
         {
@@ -72,7 +81,8 @@ public static class GamesEndpoints
             }
 
             return Results.NotFound();
-        });
+        })
+        .RequireAuthorization(Policies.WriteAccess);
 
         return gamesRouteGroup;
     }
