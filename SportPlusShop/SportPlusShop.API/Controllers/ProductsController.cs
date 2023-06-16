@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SportPlusShop.API.Models;
 using SportPlusShop.API.Persistence;
 
 namespace SportPlusShop.API.Controllers;
@@ -24,14 +25,8 @@ public class ProductsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult> GetProductByIdAsync(Guid id)
     {
-        var product = await _sportsShopDbContext.Products.FindAsync(id);
-
-        if (product == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(product);
+        return await _sportsShopDbContext.Products.FindAsync(id) is Product product
+                        ? Ok(product) : NotFound();
     }
 
 }
