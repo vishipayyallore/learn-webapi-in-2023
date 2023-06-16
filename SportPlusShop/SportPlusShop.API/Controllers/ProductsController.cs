@@ -13,4 +13,7 @@ public class ProductsController : ControllerBase
         return "OK";
     }
 
+    // [Route("/products/{id}")]
+    // [Route("/products/{id?}")] // Optional
+
 }
