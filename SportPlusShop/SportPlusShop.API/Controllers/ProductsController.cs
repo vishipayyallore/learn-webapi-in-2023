@@ -66,7 +66,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteProductAsync([FromRoute] Guid id)
+    public async Task<ActionResult<Product>> DeleteProductAsync([FromRoute] Guid id)
     {
         var product = await _sportsShopDbContext.Products.FindAsync(id);
         if (product == null)
@@ -77,7 +77,7 @@ public class ProductsController : ControllerBase
         _ = _sportsShopDbContext.Products.Remove(product);
         _ = await _sportsShopDbContext.SaveChangesAsync();
 
-        return NoContent();
+        return product;
     }
 
 }
