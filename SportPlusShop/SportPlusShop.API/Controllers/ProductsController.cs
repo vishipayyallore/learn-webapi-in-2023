@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SportPlusShop.API.Models;
+using SportPlusShop.API.Persistence;
 
 namespace SportPlusShop.API.Controllers;
 
@@ -6,14 +8,21 @@ namespace SportPlusShop.API.Controllers;
 [ApiController]
 public class ProductsController : ControllerBase
 {
+    private readonly SportsShopDbContext _sportsShopDbContext;
 
-    [HttpGet]
-    public string GetAllProducts()
+    public ProductsController(SportsShopDbContext sportsShopDbContext)
     {
-        return "OK";
+        _sportsShopDbContext = sportsShopDbContext ?? throw new ArgumentNullException(nameof(sportsShopDbContext));
     }
 
-    // [Route("/products/{id}")]
-    // [Route("/products/{id?}")] // Optional
+    [HttpGet]
+    public IEnumerable<Product> GetAllProducts()
+    {
+        return _sportsShopDbContext.Products.ToArray();
+    }
 
 }
+
+
+// [Route("/products/{id}")]
+// [Route("/products/{id?}")] // Optional
