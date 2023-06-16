@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SportPlusShop.API.Models;
 using SportPlusShop.API.Persistence;
 
@@ -16,9 +17,9 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Product> GetAllProducts()
+    public async Task<IReadOnlyCollection<Product>> GetAllProductsAsync()
     {
-        return _sportsShopDbContext.Products.ToArray();
+        return await _sportsShopDbContext.Products.ToListAsync();
     }
 
 }

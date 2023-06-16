@@ -5,14 +5,14 @@ namespace SportPlusShop.API.Persistence;
 
 public static class ModelBuilderExtensions
 {
-    public static void Seed(this ModelBuilder modelBuilder)
-    {
-        string[] _categoryIds = new[] { "15180bd4-eb9a-4ea8-8586-3fb0eb3d8b1a",
+    static readonly string[] _categoryIds = new[] { "15180bd4-eb9a-4ea8-8586-3fb0eb3d8b1a",
             "15180bd4-eb9a-4ea8-8586-3fb0eb3d8b1b", "15180bd4-eb9a-4ea8-8586-3fb0eb3d8b1c",
             "15180bd4-eb9a-4ea8-8586-3fb0eb3d8b1d", "15180bd4-eb9a-4ea8-8586-3fb0eb3d8b1e" };
 
-        static Guid GetNewGuid() => Guid.NewGuid();
+    static Guid GetNewGuid() => Guid.NewGuid();
 
+    public static void Seed(this ModelBuilder modelBuilder)
+    {
         _ = modelBuilder.Entity<Category>().HasData(
             new Category { Id = Guid.Parse(_categoryIds[0]), Name = "Active Wear - Men" },
             new Category { Id = Guid.Parse(_categoryIds[1]), Name = "Active Wear - Women" },
