@@ -11,6 +11,8 @@ public class SportsShopDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Category>()
             .HasMany(c => c.Products)
             .WithOne(a => a.Category)

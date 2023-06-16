@@ -19,7 +19,7 @@ public static class DependedServicesExtensions
 
         _ = services.AddDbContext<SportsShopDbContext>(options =>
         {
-            options.UseInMemoryDatabase("SportsShop");
+            _ = options.UseInMemoryDatabase("SportsShop");
         });
 
         return services;

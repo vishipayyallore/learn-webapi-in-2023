@@ -1,4 +1,6 @@
-﻿namespace SportPlusShop.API.Extensions;
+﻿using SportPlusShop.API.Persistence;
+
+namespace SportPlusShop.API.Extensions;
 
 public static class HttpRequestPipelineExtensions
 {
@@ -9,6 +11,10 @@ public static class HttpRequestPipelineExtensions
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+
+            using IServiceScope scope = app.Services.CreateScope();
+            using var _sportsShopDbContext = scope.ServiceProvider.GetService<SportsShopDbContext>();
+            _ = _sportsShopDbContext?.Database.EnsureCreated();
         }
 
         app.UseHttpsRedirection();
