@@ -12,6 +12,11 @@ public static class HttpRequestPipelineExtensions
             app.UseSwagger();
             app.UseSwaggerUI();
 
+            /*
+             * Conclusion: If you are using migrations there is context.Database.Migrate(). 
+             * If you don't want migrations and just want a quick database (usually for testing) 
+             * then use context.Database.EnsureCreated()/EnsureDeleted().
+             */
             using IServiceScope scope = app.Services.CreateScope();
             using var _sportsShopDbContext = scope.ServiceProvider.GetService<SportsShopDbContext>();
             _ = _sportsShopDbContext?.Database.EnsureCreated();
