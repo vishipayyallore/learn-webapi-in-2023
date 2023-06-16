@@ -23,14 +23,14 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult> GetProductByIdAsync(Guid id)
+    public async Task<ActionResult> GetProductByIdAsync([FromRoute] Guid id)
     {
         return await _sportsShopDbContext.Products.FindAsync(id) is Product product
                         ? Ok(product) : NotFound();
     }
 
     [HttpPost]
-    public async Task<ActionResult> AddProductAsync(Product product)
+    public async Task<ActionResult> AddProductAsync([FromBody] Product product)
     {
         _ = await _sportsShopDbContext.Products.AddAsync(product);
         _ = await _sportsShopDbContext.SaveChangesAsync();

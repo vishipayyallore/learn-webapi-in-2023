@@ -5,6 +5,10 @@ namespace SportPlusShop.API.Persistence;
 
 public class SportsShopDbContext : DbContext
 {
+    public DbSet<Product> Products => Set<Product>();
+
+    public DbSet<Category> Categories => Set<Category>();
+
     public SportsShopDbContext(DbContextOptions<SportsShopDbContext> options) : base(options)
     {
     }
@@ -20,8 +24,4 @@ public class SportsShopDbContext : DbContext
 
         modelBuilder.Seed();
     }
-
-    public DbSet<Product> Products => Set<Product>();
-
-    public DbSet<Category> Categories => Set<Category>();
 }

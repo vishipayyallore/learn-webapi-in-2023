@@ -2,7 +2,6 @@
 
 namespace SportPlusShop.API.Models;
 
-
 public class Product
 {
     public Guid Id { get; set; }
