@@ -80,6 +80,29 @@ public class ProductsController : ControllerBase
         return product;
     }
 
+    [HttpPost]
+    [Route("Delete")]
+    public async Task<ActionResult> DeleteMultipleProductsAsync([FromQuery] Guid[] ids)
+    {
+        var products = new List<Product>();
+        foreach (var id in ids)
+        {
+            var product = await _sportsShopDbContext.Products.FindAsync(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            products.Add(product);
+        }
+
+        _sportsShopDbContext.Products.RemoveRange(products);
+        await _sportsShopDbContext.SaveChangesAsync();
+
+        return Ok(products);
+    }
+
 }
 
 
