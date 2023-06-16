@@ -1,20 +1,17 @@
-using Microsoft.EntityFrameworkCore;
-using SportPlusShop.API.Persistence;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<SportsShopDbContext>(options =>
-{
-    _ = options.UseInMemoryDatabase("SportsShop");
-});
+//builder.Services.AddDbContext<SportsShopDbContext>(options =>
+//{
+//    _ = options.UseInMemoryDatabase("SportsShop");
+//});
 
 var app = builder.Build();
 
