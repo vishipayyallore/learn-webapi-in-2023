@@ -29,6 +29,15 @@ public class ProductsController : ControllerBase
                         ? Ok(product) : NotFound();
     }
 
+    [HttpPost]
+    public async Task<ActionResult> AddProductAsync(Product product)
+    {
+        _ = await _sportsShopDbContext.Products.AddAsync(product);
+        _ = await _sportsShopDbContext.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetAllProductsAsync), new { id = product.Id }, product);
+    }
+
 }
 
 
