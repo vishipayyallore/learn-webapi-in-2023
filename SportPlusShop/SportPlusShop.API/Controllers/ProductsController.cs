@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SportPlusShop.API.Models;
 using SportPlusShop.API.Persistence;
 
 namespace SportPlusShop.API.Controllers;
@@ -17,9 +16,22 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IReadOnlyCollection<Product>> GetAllProductsAsync()
+    public async Task<ActionResult> GetAllProductsAsync()
     {
-        return await _sportsShopDbContext.Products.ToListAsync();
+        return Ok(await _sportsShopDbContext.Products.ToListAsync());
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetProductByIdAsync(Guid id)
+    {
+        var product = await _sportsShopDbContext.Products.FindAsync(id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(product);
     }
 
 }
