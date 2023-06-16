@@ -6,7 +6,7 @@ namespace SportPlusShop.API.Extensions;
 public static class DependedServicesExtensions
 {
 
-    public static IServiceCollection ConfigureDependedServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection ConfigureDependedServices(this IServiceCollection services)
     {
         _ = services.AddControllers(options =>
         {
