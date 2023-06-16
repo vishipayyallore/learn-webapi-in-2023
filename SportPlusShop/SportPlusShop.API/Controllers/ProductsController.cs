@@ -38,6 +38,33 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(GetAllProductsAsync), new { id = product.Id }, product);
     }
 
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateProductAsync([FromRoute] Guid id, [FromBody] Product product)
+    {
+        if (id != product.Id)
+        {
+            return BadRequest();
+        }
+
+        _sportsShopDbContext.Entry(product).State = EntityState.Modified;
+
+        try
+        {
+            await _sportsShopDbContext.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_sportsShopDbContext.Products.Any(p => p.Id == id))
+            {
+                return NotFound();
+            }
+
+            throw;
+        }
+
+        return NoContent();
+    }
+
 }
 
 
