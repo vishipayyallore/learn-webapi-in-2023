@@ -13,13 +13,23 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/api/Products",
+					"raw": "{{baseUrl}}/api/Products?Size=2&Page=2",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
 						"Products"
+					],
+					"query": [
+						{
+							"key": "Size",
+							"value": "2"
+						},
+						{
+							"key": "Page",
+							"value": "2"
+						}
 					]
 				}
 			},
