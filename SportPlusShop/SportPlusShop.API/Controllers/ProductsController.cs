@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SportPlusShop.API.Models;
 using SportPlusShop.API.Persistence;
+using SportPlusShop.API.Queries;
 
 namespace SportPlusShop.API.Controllers;
 
@@ -17,9 +18,15 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetAllProductsAsync()
+    public async Task<ActionResult> GetAllProductsAsync([FromQuery] QueryParameters queryParameters)
     {
-        return Ok(await _sportsShopDbContext.Products.ToListAsync());
+        IQueryable<Product> products = _sportsShopDbContext.Products;
+
+        products = products
+            .Skip(queryParameters.Size * (queryParameters.Page - 1))
+            .Take(queryParameters.Size);
+
+        return Ok(await products.ToListAsync());
     }
 
     [HttpGet("{id}")]
