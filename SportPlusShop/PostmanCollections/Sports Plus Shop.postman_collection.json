@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "4753dc03-e1c2-43cc-98bd-a2e88cf55030",
+		"name": "Sports Plus Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24752915",
+		"_collection_link": "https://blue-shuttle-104465.postman.co/workspace/Learn-From-Others-in-2023~3270eeaa-9234-4e9e-a588-5cf30dc0455a/collection/24752915-4753dc03-e1c2-43cc-98bd-a2e88cf55030?action=share&creator=24752915&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "GET /api/Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/Products?Size=2&Page=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "Size",
+							"value": "2"
+						},
+						{
+							"key": "Page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
