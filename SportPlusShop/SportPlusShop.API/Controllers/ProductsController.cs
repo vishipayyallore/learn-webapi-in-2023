@@ -32,9 +32,18 @@ public class ProductsController : ControllerBase
             products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
         }
 
-        products = products
-            .Skip(queryParameters.Size * (queryParameters.Page - 1))
-            .Take(queryParameters.Size);
+        if (!string.IsNullOrEmpty(queryParameters.Sku))
+        {
+            products = products.Where(p => p.Sku == queryParameters.Sku);
+        }
+
+        if (!string.IsNullOrEmpty(queryParameters.Name))
+        {
+            products = products.Where(p => p.Name!.ToLower().Contains(queryParameters.Name.ToLower()));
+        }
+
+        products = products.Skip(queryParameters.Size * (queryParameters.Page - 1))
+                            .Take(queryParameters.Size);
 
         return Ok(await products.ToListAsync());
     }
