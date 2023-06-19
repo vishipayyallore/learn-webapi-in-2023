@@ -18,9 +18,19 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetAllProductsAsync([FromQuery] QueryParameters queryParameters)
+    public async Task<ActionResult> GetAllProductsAsync([FromQuery] ProductQueryParameters queryParameters)
     {
         IQueryable<Product> products = _sportsShopDbContext.Products;
+
+        if (queryParameters.MinPrice is not null)
+        {
+            products = products.Where(p => p.Price >= queryParameters.MinPrice.Value);
+        }
+
+        if (queryParameters.MaxPrice is not null)
+        {
+            products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
+        }
 
         products = products
             .Skip(queryParameters.Size * (queryParameters.Page - 1))
