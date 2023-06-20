@@ -21,12 +21,6 @@ public class QueryParameters
     {
         get => _sortOrder;
 
-        set
-        {
-            if (value is "asc" or "desc")
-            {
-                _sortOrder = value;
-            }
-        }
+        set => _sortOrder = (value is "asc" or "desc") ? value : "asc";
     }
 }
