@@ -42,8 +42,7 @@ public class ProductsController : ControllerBase
             products = products.Where(p => p.Name!.ToLower().Contains(queryParameters.Name.ToLower()));
         }
 
-        products = products.Skip(queryParameters.Size * (queryParameters.Page - 1))
-                            .Take(queryParameters.Size);
+        products = products.Skip(queryParameters.Size * (queryParameters.Page - 1)).Take(queryParameters.Size);
 
         return Ok(await products.ToListAsync());
     }
