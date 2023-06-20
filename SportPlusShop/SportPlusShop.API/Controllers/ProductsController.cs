@@ -23,12 +23,12 @@ public class ProductsController : ControllerBase
     {
         IQueryable<Product> products = _sportsShopDbContext.Products;
 
-        if (queryParameters.MinPrice is not null)
+        if (queryParameters.MinPrice.HasValue)
         {
             products = products.Where(p => p.Price >= queryParameters.MinPrice.Value);
         }
 
-        if (queryParameters.MaxPrice is not null)
+        if (queryParameters.MaxPrice.HasValue)
         {
             products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
         }
