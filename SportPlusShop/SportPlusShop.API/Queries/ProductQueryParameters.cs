@@ -10,4 +10,5 @@ public class ProductQueryParameters : QueryParameters
 
     public string? Name { get; set; }
 
+    public string? SearchTerm { get; set; }
 }
