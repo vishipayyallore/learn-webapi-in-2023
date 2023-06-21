@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SportPlusShop.API.Extensions;
 using SportPlusShop.API.Models;
 using SportPlusShop.API.Persistence;
 using SportPlusShop.API.Queries;
@@ -22,12 +23,12 @@ public class ProductsController : ControllerBase
     {
         IQueryable<Product> products = _sportsShopDbContext.Products;
 
-        if (queryParameters.MinPrice is not null)
+        if (queryParameters.MinPrice.HasValue)
         {
             products = products.Where(p => p.Price >= queryParameters.MinPrice.Value);
         }
 
-        if (queryParameters.MaxPrice is not null)
+        if (queryParameters.MaxPrice.HasValue)
         {
             products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
         }
@@ -40,6 +41,14 @@ public class ProductsController : ControllerBase
         if (!string.IsNullOrEmpty(queryParameters.Name))
         {
             products = products.Where(p => p.Name!.ToLower().Contains(queryParameters.Name.ToLower()));
+        }
+
+        if (!string.IsNullOrEmpty(queryParameters.SortBy))
+        {
+            if (typeof(Product).GetProperty(queryParameters.SortBy) is not null)
+            {
+                products = products.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
+            }
         }
 
         products = products.Skip(queryParameters.Size * (queryParameters.Page - 1)).Take(queryParameters.Size);
