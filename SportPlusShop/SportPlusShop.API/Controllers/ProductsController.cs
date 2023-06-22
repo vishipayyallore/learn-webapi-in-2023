@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SportPlusShop.API.Entities;
 using SportPlusShop.API.Extensions;
-using SportPlusShop.API.Models;
 using SportPlusShop.API.Persistence;
 using SportPlusShop.API.Queries;
 
@@ -31,6 +31,13 @@ public class ProductsController : ControllerBase
         if (queryParameters.MaxPrice.HasValue)
         {
             products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
+        }
+
+        if (!string.IsNullOrEmpty(queryParameters.SearchTerm))
+        {
+            products = products.Where(p =>
+                    p.Sku!.ToLower().Contains(queryParameters.SearchTerm.ToLower()) ||
+                    p.Name!.ToLower().Contains(queryParameters.SearchTerm.ToLower()));
         }
 
         if (!string.IsNullOrEmpty(queryParameters.Sku))

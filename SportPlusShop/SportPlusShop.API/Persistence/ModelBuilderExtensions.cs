@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SportPlusShop.API.Models;
+using SportPlusShop.API.Entities;
 
 namespace SportPlusShop.API.Persistence;
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SportPlusShop.API.Models;
+namespace SportPlusShop.API.Entities;
 
 public class Category
 {

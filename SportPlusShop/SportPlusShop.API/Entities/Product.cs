@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace SportPlusShop.API.Models;
+namespace SportPlusShop.API.Entities;
 
 public class Product
 {
