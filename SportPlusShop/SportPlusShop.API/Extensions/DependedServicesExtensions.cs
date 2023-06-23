@@ -13,6 +13,13 @@ public static class DependedServicesExtensions
             options.SuppressAsyncSuffixInActionNames = false;
         });
 
+        _ = services.AddApiVersioning(options =>
+        {
+            options.ReportApiVersions = true;
+            options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+            options.AssumeDefaultVersionWhenUnspecified = true;
+        });
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         _ = services.AddEndpointsApiExplorer();
         _ = services.AddSwaggerGen();
