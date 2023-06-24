@@ -20,6 +20,12 @@ public static class DependedServicesExtensions
             options.AssumeDefaultVersionWhenUnspecified = true;
         });
 
+        services.AddVersionedApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'VVV";
+            options.SubstituteApiVersionInUrl = true;
+        });
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         _ = services.AddEndpointsApiExplorer();
         _ = services.AddSwaggerGen();
