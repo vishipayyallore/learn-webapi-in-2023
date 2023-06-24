@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using SportPlusShop.API.Persistence;
 
 namespace SportPlusShop.API.Extensions;
@@ -16,11 +18,14 @@ public static class DependedServicesExtensions
         _ = services.AddApiVersioning(options =>
         {
             options.ReportApiVersions = true;
-            options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+            options.DefaultApiVersion = new ApiVersion(1, 0);
             options.AssumeDefaultVersionWhenUnspecified = true;
+            options.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
+                                                            new HeaderApiVersionReader("x-api-version"),
+                                                            new MediaTypeApiVersionReader("x-api-version"));
         });
 
-        services.AddVersionedApiExplorer(options =>
+        _ = services.AddVersionedApiExplorer(options =>
         {
             options.GroupNameFormat = "'v'VVV";
             options.SubstituteApiVersionInUrl = true;
@@ -29,6 +34,8 @@ public static class DependedServicesExtensions
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         _ = services.AddEndpointsApiExplorer();
         _ = services.AddSwaggerGen();
+
+        // _ = services.ConfigureOptions<ConfigureSwaggerOptions>();
 
         _ = services.AddDbContext<SportsShopDbContext>(options =>
         {
