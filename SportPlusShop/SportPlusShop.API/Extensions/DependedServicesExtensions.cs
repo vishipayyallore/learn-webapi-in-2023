@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using SportPlusShop.API.Persistence;
+using SportPlusShop.API.SwaggerHelpers;
 
 namespace SportPlusShop.API.Extensions;
 
@@ -35,7 +36,7 @@ public static class DependedServicesExtensions
         _ = services.AddEndpointsApiExplorer();
         _ = services.AddSwaggerGen();
 
-        // _ = services.ConfigureOptions<ConfigureSwaggerOptions>();
+        _ = services.ConfigureOptions<ConfigureSwaggerOptions>();
 
         _ = services.AddDbContext<SportsShopDbContext>(options =>
         {
