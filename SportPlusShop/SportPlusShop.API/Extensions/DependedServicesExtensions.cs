@@ -23,6 +23,7 @@ public static class DependedServicesExtensions
             options.AssumeDefaultVersionWhenUnspecified = true;
             options.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
                                                             new HeaderApiVersionReader("x-api-version"),
+                                                            new QueryStringApiVersionReader("api-version"),
                                                             new MediaTypeApiVersionReader("x-api-version"));
         });
 
