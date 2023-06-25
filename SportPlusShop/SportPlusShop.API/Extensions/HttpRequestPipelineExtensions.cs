@@ -1,4 +1,5 @@
-﻿using SportPlusShop.API.Persistence;
+﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using SportPlusShop.API.Persistence;
 
 namespace SportPlusShop.API.Extensions;
 
@@ -10,7 +11,22 @@ public static class HttpRequestPipelineExtensions
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+
+            var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+            app.UseSwaggerUI(options =>
+            {
+                //foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                //{
+                //    options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+                //        description.GroupName.ToUpperInvariant());
+                //}
+
+                foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions.Reverse())
+                {
+                    options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+                        description.GroupName.ToUpperInvariant());
+                }
+            });
 
             /*
              * Conclusion: If you are using migrations there is context.Database.Migrate(). 
