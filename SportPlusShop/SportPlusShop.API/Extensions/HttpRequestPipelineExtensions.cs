@@ -46,6 +46,8 @@ public static class HttpRequestPipelineExtensions
 
         app.UseAuthorization();
 
+        app.UseCors();
+
         app.MapControllers();
 
         app.MapGet("/", () => "Please use /swagger to see the SportPlusShop.API documentation.");
