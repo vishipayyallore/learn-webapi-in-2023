@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "Postm
 		PostmanCollections\Sports-Shop-Local.postman_environment.json = PostmanCollections\Sports-Shop-Local.postman_environment.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportPlusShop.Web", "SportPlusShop.Web\SportPlusShop.Web.csproj", "{141AFE76-3D2F-408A-84AB-76356C34273F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2CE8208F-5F92-451B-8E5E-98FB85EDE27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CE8208F-5F92-451B-8E5E-98FB85EDE27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CE8208F-5F92-451B-8E5E-98FB85EDE27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141AFE76-3D2F-408A-84AB-76356C34273F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141AFE76-3D2F-408A-84AB-76356C34273F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141AFE76-3D2F-408A-84AB-76356C34273F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141AFE76-3D2F-408A-84AB-76356C34273F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
