@@ -49,7 +49,7 @@ public static class DependedServicesExtensions
             options.AddDefaultPolicy(builder =>
             {
                 builder
-                    .WithOrigins("https://localhost:7233")
+                    .WithOrigins("https://localhost:7256")
                     .WithHeaders("X-API-Version");
             });
         });
