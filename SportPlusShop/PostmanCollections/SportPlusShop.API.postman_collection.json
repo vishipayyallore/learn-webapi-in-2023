@@ -419,6 +419,520 @@
 							]
 						},
 						{
+							"name": "api/V1.0/Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/V1.0/Products?SortBy=Price&SortOrder=desc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"V1.0",
+										"Products"
+									],
+									"query": [
+										{
+											"key": "MinPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "MaxPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "Sku",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Name",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "SearchTerm",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Page",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "Size",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "SortBy",
+											"value": "Price"
+										},
+										{
+											"key": "SortOrder",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Products?MinPrice=<double>&MaxPrice=<double>&Sku=<string>&Name=<string>&SearchTerm=<string>&Page=<integer>&Size=<integer>&SortBy=<string>&SortOrder=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Products"
+											],
+											"query": [
+												{
+													"key": "MinPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "MaxPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "Sku",
+													"value": "<string>"
+												},
+												{
+													"key": "Name",
+													"value": "<string>"
+												},
+												{
+													"key": "SearchTerm",
+													"value": "<string>"
+												},
+												{
+													"key": "Page",
+													"value": "<integer>"
+												},
+												{
+													"key": "Size",
+													"value": "<integer>"
+												},
+												{
+													"key": "SortBy",
+													"value": "<string>"
+												},
+												{
+													"key": "SortOrder",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "api/V2.0/Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/V2.0/Products?SortBy=Price&SortOrder=desc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"V2.0",
+										"Products"
+									],
+									"query": [
+										{
+											"key": "MinPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "MaxPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "Sku",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Name",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "SearchTerm",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Page",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "Size",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "SortBy",
+											"value": "Price"
+										},
+										{
+											"key": "SortOrder",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Products?MinPrice=<double>&MaxPrice=<double>&Sku=<string>&Name=<string>&SearchTerm=<string>&Page=<integer>&Size=<integer>&SortBy=<string>&SortOrder=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Products"
+											],
+											"query": [
+												{
+													"key": "MinPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "MaxPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "Sku",
+													"value": "<string>"
+												},
+												{
+													"key": "Name",
+													"value": "<string>"
+												},
+												{
+													"key": "SearchTerm",
+													"value": "<string>"
+												},
+												{
+													"key": "Page",
+													"value": "<integer>"
+												},
+												{
+													"key": "Size",
+													"value": "<integer>"
+												},
+												{
+													"key": "SortBy",
+													"value": "<string>"
+												},
+												{
+													"key": "SortOrder",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "api/Products - Header",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-version",
+										"value": "4.0",
+										"description": "Supported Versions 3.0 | 4.0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Products?SortBy=Price&SortOrder=desc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Products"
+									],
+									"query": [
+										{
+											"key": "MinPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "MaxPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "Sku",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Name",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "SearchTerm",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Page",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "Size",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "SortBy",
+											"value": "Price"
+										},
+										{
+											"key": "SortOrder",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Products?MinPrice=<double>&MaxPrice=<double>&Sku=<string>&Name=<string>&SearchTerm=<string>&Page=<integer>&Size=<integer>&SortBy=<string>&SortOrder=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Products"
+											],
+											"query": [
+												{
+													"key": "MinPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "MaxPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "Sku",
+													"value": "<string>"
+												},
+												{
+													"key": "Name",
+													"value": "<string>"
+												},
+												{
+													"key": "SearchTerm",
+													"value": "<string>"
+												},
+												{
+													"key": "Page",
+													"value": "<integer>"
+												},
+												{
+													"key": "Size",
+													"value": "<integer>"
+												},
+												{
+													"key": "SortBy",
+													"value": "<string>"
+												},
+												{
+													"key": "SortOrder",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "api/Products - Query String",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Products?SortBy=Price&SortOrder=desc&api-version=4.0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Products"
+									],
+									"query": [
+										{
+											"key": "MinPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "MaxPrice",
+											"value": "<double>",
+											"disabled": true
+										},
+										{
+											"key": "Sku",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Name",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "SearchTerm",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "Page",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "Size",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "SortBy",
+											"value": "Price"
+										},
+										{
+											"key": "SortOrder",
+											"value": "desc"
+										},
+										{
+											"key": "api-version",
+											"value": "4.0",
+											"description": "Supported Versions 3.0 | 4.0"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Products?MinPrice=<double>&MaxPrice=<double>&Sku=<string>&Name=<string>&SearchTerm=<string>&Page=<integer>&Size=<integer>&SortBy=<string>&SortOrder=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Products"
+											],
+											"query": [
+												{
+													"key": "MinPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "MaxPrice",
+													"value": "<double>"
+												},
+												{
+													"key": "Sku",
+													"value": "<string>"
+												},
+												{
+													"key": "Name",
+													"value": "<string>"
+												},
+												{
+													"key": "SearchTerm",
+													"value": "<string>"
+												},
+												{
+													"key": "Page",
+													"value": "<integer>"
+												},
+												{
+													"key": "Size",
+													"value": "<integer>"
+												},
+												{
+													"key": "SortBy",
+													"value": "<string>"
+												},
+												{
+													"key": "SortOrder",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
 							"name": "/api/Products",
 							"request": {
 								"method": "POST",
