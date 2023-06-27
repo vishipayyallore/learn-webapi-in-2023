@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SportPlusShop.Web.Data;
 var builder = WebApplication.CreateBuilder(args);
