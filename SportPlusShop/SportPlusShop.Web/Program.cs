@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SportPlusShop.Web.Areas.Identity.Data;
 using SportPlusShop.Web.Data;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("SportPlusShopWebContextConnection") ?? throw new InvalidOperationException("Connection string 'SportPlusShopWebContextConnection' not found.");
