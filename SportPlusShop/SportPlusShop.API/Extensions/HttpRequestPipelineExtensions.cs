@@ -37,10 +37,16 @@ public static class HttpRequestPipelineExtensions
             using var _sportsShopDbContext = scope.ServiceProvider.GetService<SportsShopDbContext>();
             _ = _sportsShopDbContext?.Database.EnsureCreated();
         }
+        else
+        {
+            _ = app.UseHsts();
+        }
 
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+
+        app.UseCors();
 
         app.MapControllers();
 

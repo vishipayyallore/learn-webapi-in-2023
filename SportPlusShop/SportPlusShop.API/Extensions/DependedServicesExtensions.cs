@@ -44,6 +44,16 @@ public static class DependedServicesExtensions
             _ = options.UseInMemoryDatabase("SportsShop");
         });
 
+        _ = services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                    .WithOrigins("https://localhost:7256")
+                    .WithHeaders("X-API-Version");
+            });
+        });
+
         return services;
     }
 
