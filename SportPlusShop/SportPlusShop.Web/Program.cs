@@ -1,4 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SportPlusShop.Web.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("SportPlusShopWebContextConnection") ?? throw new InvalidOperationException("Connection string 'SportPlusShopWebContextConnection' not found.");
+
+builder.Services.AddDbContext<SportPlusShopWebContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<SportPlusShopWebUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SportPlusShopWebContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
