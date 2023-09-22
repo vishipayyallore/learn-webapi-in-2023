@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShirtsShop.Api", "ShirtsShop.Api\ShirtsShop.Api.csproj", "{AC60F240-BE0F-4D3F-B281-67160763AF3A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "PostmanCollections", "{1077E7E4-3CD2-4420-B022-3BE8DA1BEB1B}"
+	ProjectSection(SolutionItems) = preProject
+		PostmanCollections\ShirtsShop.Api.postman_collection.json = PostmanCollections\ShirtsShop.Api.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
