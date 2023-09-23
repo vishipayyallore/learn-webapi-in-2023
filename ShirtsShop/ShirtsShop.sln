@@ -5,7 +5,12 @@ VisualStudioVersion = 17.8.34112.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8CF1E6B3-6AC3-4ECA-B380-B85D1D4E9D34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShirtsShop.Api", "ShirtsShop.Api\ShirtsShop.Api.csproj", "{AC60F240-BE0F-4D3F-B281-67160763AF3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShirtsShop.Api", "ShirtsShop.Api\ShirtsShop.Api.csproj", "{AC60F240-BE0F-4D3F-B281-67160763AF3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "PostmanCollections", "{1077E7E4-3CD2-4420-B022-3BE8DA1BEB1B}"
+	ProjectSection(SolutionItems) = preProject
+		PostmanCollections\ShirtsShop.Api.postman_collection.json = PostmanCollections\ShirtsShop.Api.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
